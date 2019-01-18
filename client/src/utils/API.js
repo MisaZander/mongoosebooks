@@ -1,8 +1,9 @@
 import axios from "axios";
+const BASEURL = "https://www.googleapis.com/books/v1/volumes?q=";
 
-//Proxy these requests to the backend to keep the API key hidden
 export default {
   search: function(query) {
-    return axios.get(`/api/books/${query}`);
+    const newQuery = query.replace(" ", "+");
+    return axios.get(BASEURL + newQuery);
   }
 };
