@@ -1,13 +1,8 @@
 import axios from "axios";
 
-//const BASEURL = "https://api.giphy.com/v1/gifs/search?q=";
-//const APIKEY = "&api_key=dc6zaTOxFJmzC&limit=20";
-const BASEURL = "https://www.googleapis.com/books/v1/volumes?q=";
-const APIKEY = "&key=" + process.env.APIKEY;
-
-// Export an object with a "search" method that searches the Giphy API for the passed query
+//Proxy these requests to the backend to keep the API key hidden
 export default {
   search: function(query) {
-    return axios.get(BASEURL + query + APIKEY);
+    return axios.get(`/api/books/${query}`);
   }
 };

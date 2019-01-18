@@ -19,23 +19,7 @@ class Search extends Component {
   onSubmit = e => {
     e.preventDefault();
     API.search(this.state.search).then(response => {
-      const results = response.data.items.map(result => {
-        const { id } = result;
-        const { title, authors, description, previewLink } = result.volumeInfo;
-        const { thumbnail } = result.volumeInfo.imageLinks;
-
-        const data = {
-          gid: id,
-          title,
-          authors,
-          description,
-          link: previewLink,
-          img: thumbnail
-        };
-
-        return data;
-      });
-      console.log(results);
+      this.setState({ results: response.data });
     });
   };
 
