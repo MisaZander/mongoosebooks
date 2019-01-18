@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SearchBar from "./SearchBar";
 import Result from "./Result";
-import { Row } from "reactstrap";
+//import { Row } from "reactstrap";
 import API from "../utils/API";
 import isEmpty from "../utils/is-empty";
 
@@ -74,18 +74,16 @@ class Search extends Component {
           {this.state.results.map((result, index) => {
             return (
               <li className="list-group-item" key={index}>
-                <Row>
-                  <Result
-                    key={index}
-                    id={index}
-                    title={result.title}
-                    authors={result.authors}
-                    description={result.description}
-                    img={result.img}
-                    link={result.link}
-                    onSaveClick={this.onSaveClick}
-                  />
-                </Row>
+                <Result
+                  key={index}
+                  id={index}
+                  title={result.title}
+                  authors={result.authors}
+                  description={result.description}
+                  img={result.img}
+                  link={result.link}
+                  onSaveClick={this.onSaveClick}
+                />
               </li>
             );
           })}
