@@ -11,6 +11,15 @@ class Search extends Component {
     };
   }
 
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    alert(this.state.search);
+  };
+
   render() {
     let results;
     if (this.state.results.length > 0) {
@@ -23,7 +32,11 @@ class Search extends Component {
 
     return (
       <div>
-        <SearchBar />
+        <SearchBar
+          value={this.state.search}
+          onChange={this.onChange}
+          onSubmit={this.onSubmit}
+        />
         {results}
       </div>
     );
