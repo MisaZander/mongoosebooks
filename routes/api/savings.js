@@ -13,6 +13,7 @@ router.get("/", (req, res) => {
 //@route POST api/savings
 //@desc Save a new book to the DB
 //@access Public
+router.post("/", (req, res) => {});
 
 //@route DELETE api/savings/:id
 //@desc Delete a book from the DB

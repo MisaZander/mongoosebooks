@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SearchBar from "./SearchBar";
 import { Container } from "reactstrap";
+import API from "../utils/API";
 
 class Search extends Component {
   constructor(props) {
@@ -17,7 +18,25 @@ class Search extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    alert(this.state.search);
+    API.search(this.state.search).then(response => {
+      const results = response.data.items.map(result => {
+        const { id } = result;
+        const { title, authors, description, previewLink } = result.volumeInfo;
+        const { thumbnail } = result.volumeInfo.imageLinks;
+
+        const data = {
+          gid: id,
+          title,
+          authors,
+          description,
+          link: previewLink,
+          img: thumbnail
+        };
+
+        return data;
+      });
+      console.log(results);
+    });
   };
 
   render() {
