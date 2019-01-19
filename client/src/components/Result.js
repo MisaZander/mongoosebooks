@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Row, Col, Button } from "reactstrap";
 
 const Result = props => {
@@ -28,9 +27,9 @@ const Result = props => {
         <Button color="success" onClick={() => props.onSaveClick(props.id)}>
           Save!
         </Button>
-        <Link to={props.link} target="_blank" rel="noopener noreferrer">
+        <a href={props.link} target="_blank" rel="noopener noreferrer">
           <Button color="info">More Info</Button>
-        </Link>
+        </a>
       </Col>
     </Row>
   );

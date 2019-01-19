@@ -15,39 +15,7 @@ router.get("/:query", (req, res) => {
   axios
     .get(BASEURL + query)
     .then(results => {
-      const goodies = results.data.items.map(result => {
-        // const { id } = result;
-        // const { title, authors, description, previewLink } = result.volumeInfo;
-        // const { thumbnail } = result.volumeInfo.imageLinks;
-        // const id = isEmpty(result.id) ? "" : result.id;
-        // const title = isEmpty(result.volumeInfo.title)
-        //   ? "No Title"
-        //   : result.volumeInfo.title;
-        // const authors = isEmpty(result.volumeInfo.authors)
-        //   ? "No Authors"
-        //   : result.volumeInfo.authors;
-        // const description = isEmpty(result.volumeInfo.description)
-        //   ? "No description"
-        //   : result.volumeInfo.description;
-        // const previewLink = isEmpty(result.volumeInfo.previewLink)
-        //   ? "No previewLink"
-        //   : result.volumeInfo.previewLink;
-        // const thumbnail = isEmpty(result.volumeInfo.imageLinks.thumbnail)
-        //   ? "https://placehold.it/300x300"
-        //   : result.volumeInfo.imageLinks.thumbnail;
-
-        // const data = {
-        //   gid: id,
-        //   title,
-        //   authors,
-        //   description,
-        //   link: previewLink,
-        //   img: thumbnail
-        // };
-        // return data;
-        return result;
-      });
-      return res.status(200).json(goodies);
+      return res.status(200).json(results.data);
     })
     .catch(err => {
       errors.err = err;
