@@ -11,12 +11,10 @@ const SavingSchema = new Schema({
     type: String,
     required: true
   },
-  author: [
-    {
-      type: String,
-      required: true
-    }
-  ],
+  authors: {
+    type: String,
+    required: true
+  },
   description: {
     type: String,
     required: true

@@ -65,9 +65,10 @@ class Search extends Component {
   onSaveClick = id => {
     //console.log("Attempting to save id " + id);
     const data = this.state.results[id];
+    console.log(data); //Author data OK
     API.saveBook(data)
       .then(response => {
-        console.log(response.data);
+        console.log(response.data); //Author data NOT OKAY
         alert("Saved!");
       })
       .catch(err => {
@@ -81,13 +82,14 @@ class Search extends Component {
       results = (
         <ul className="list-group">
           {this.state.results.map((result, index) => {
+            let authors = result.authors.join(", ");
             return (
               <li className="list-group-item" key={index}>
                 <Result
                   key={index}
                   id={index}
                   title={result.title}
-                  authors={result.authors}
+                  authors={authors}
                   description={result.description}
                   img={result.thumbnail}
                   link={result.link}
