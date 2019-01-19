@@ -25,7 +25,6 @@ class Savings extends Component {
   }
 
   onDeleteClick = id => {
-    console.log("Attempting to remove id " + id);
     API.deleteBook(this.state.savings[id].gid).then(response => {
       this.goGetIt();
     });

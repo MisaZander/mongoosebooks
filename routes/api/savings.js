@@ -12,7 +12,6 @@ router.get("/", (req, res) => {
     .sort({ date: -1 })
     .exec((err, savings) => {
       if (err) {
-        console.log(err);
         errors.err = err;
         return res.status(500).json(errors);
       }
@@ -39,7 +38,6 @@ router.post("/", (req, res) => {
 
   newSaving.save((err, saving) => {
     if (err) {
-      console.log(err);
       return res.status(400).json(err);
     }
     return res.status(200).json(saving);
@@ -52,7 +50,6 @@ router.post("/", (req, res) => {
 router.delete("/:gid", (req, res) => {
   Saving.deleteOne({ gid: req.params.gid }).exec(err => {
     if (err) {
-      console.log(err);
       return res.status(404).json(err);
     }
     return res.status(200).json({ msg: "Book unshelved" });

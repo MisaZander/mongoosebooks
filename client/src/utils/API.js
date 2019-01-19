@@ -10,7 +10,6 @@ export default {
     return axios.get(BASEURL + newQuery);
   },
   saveBook: data => {
-    console.log(data); //Author data OK
     return axios.post("/api/savings", data);
   },
   deleteBook: id => {

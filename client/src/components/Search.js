@@ -66,12 +66,9 @@ class Search extends Component {
   };
 
   onSaveClick = id => {
-    //console.log("Attempting to save id " + id);
     const data = this.state.results[id];
-    console.log(data); //Author data OK
     API.saveBook(data)
       .then(response => {
-        console.log(response.data); //Author data NOT OKAY
         alert("Saved!");
       })
       .catch(err => {
