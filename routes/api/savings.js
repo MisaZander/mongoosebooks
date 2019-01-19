@@ -49,5 +49,14 @@ router.post("/", (req, res) => {
 //@route DELETE api/savings/:id
 //@desc Delete a book from the DB
 //@access Public
+router.delete("/:gid", (req, res) => {
+  Saving.deleteOne({ gid: req.params.gid }).exec(err => {
+    if (err) {
+      console.log(err);
+      return res.status(404).json(err);
+    }
+    return res.status(200).json({ msg: "Book unshelved" });
+  });
+});
 
 module.exports = router;

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SearchBar from "./SearchBar";
 import Result from "./Result";
+import Spinner from "./Spinner";
 //import { Row } from "reactstrap";
 import API from "../utils/API";
 import isEmpty from "../utils/is-empty";
@@ -10,6 +11,7 @@ class Search extends Component {
     super(props);
     this.state = {
       search: "",
+      isLoading: false,
       results: []
     };
   }
@@ -19,6 +21,7 @@ class Search extends Component {
   };
 
   onSubmit = e => {
+    this.setState({ isLoading: true });
     e.preventDefault();
     API.search(this.state.search)
       .then(response => {
@@ -55,7 +58,7 @@ class Search extends Component {
           };
           return data;
         });
-        this.setState({ results: goodies, search: "" });
+        this.setState({ results: goodies, search: "", isLoading: false });
       })
       .catch(err => {
         console.log(err);
@@ -93,7 +96,8 @@ class Search extends Component {
                   description={result.description}
                   img={result.thumbnail}
                   link={result.link}
-                  onSaveClick={this.onSaveClick}
+                  btnAction="save"
+                  onClick={this.onSaveClick}
                 />
               </li>
             );
@@ -101,7 +105,7 @@ class Search extends Component {
         </ul>
       );
     } else {
-      results = <h6>Use the search bar to find a book.</h6>;
+      results = <h6 className="my-4">Use the search bar to find a book.</h6>;
     }
 
     return (
@@ -111,7 +115,7 @@ class Search extends Component {
           onChange={this.onChange}
           onSubmit={this.onSubmit}
         />
-        {results}
+        {this.state.isLoading ? <Spinner /> : results}
       </div>
     );
   }

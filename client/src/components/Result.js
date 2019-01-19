@@ -11,9 +11,13 @@ const Result = props => {
         <h3>{props.title}</h3>
         <p className="lead">{props.authors}</p>
         <p>{props.description}</p>
-        <Button color="success" onClick={() => props.onSaveClick(props.id)}>
-          Save!
+        <Button
+          color={props.btnAction === "save" ? "success" : "danger"}
+          onClick={() => props.onClick(props.id)}
+        >
+          {props.btnAction === "save" ? "Shelve" : "Unshelve"}
         </Button>
+        {"  "}
         <a href={props.link} target="_blank" rel="noopener noreferrer">
           <Button color="info">More Info</Button>
         </a>

@@ -2,20 +2,34 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import API from "../utils/API";
 import Result from "./Result";
+import Spinner from "./Spinner";
 
 class Savings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      savings: []
+      savings: [],
+      isLoading: false
     };
   }
 
-  componentDidMount() {
+  goGetIt = () => {
+    this.setState({ isLoading: true });
     API.getBooks().then(response => {
-      this.setState({ savings: response.data });
+      this.setState({ savings: response.data, isLoading: false });
     });
+  };
+
+  componentDidMount() {
+    this.goGetIt();
   }
+
+  onDeleteClick = id => {
+    console.log("Attempting to remove id " + id);
+    API.deleteBook(this.state.savings[id].gid).then(response => {
+      this.goGetIt();
+    });
+  };
 
   render() {
     let savings;
@@ -33,7 +47,8 @@ class Savings extends Component {
                   description={saving.description}
                   img={saving.thumbnail}
                   link={saving.link}
-                  onSaveClick={this.onSaveClick}
+                  btnAction="delete"
+                  onClick={this.onDeleteClick}
                 />
               </li>
             );
@@ -51,7 +66,7 @@ class Savings extends Component {
     return (
       <div>
         <h1 className="display-4 text-center">Welcome to your Savings!</h1>
-        {savings}
+        {this.state.isLoading ? <Spinner /> : savings}
       </div>
     );
   }
