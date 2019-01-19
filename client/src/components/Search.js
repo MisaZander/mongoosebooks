@@ -42,7 +42,7 @@ class Search extends Component {
           const thumbnail =
             isEmpty(result.volumeInfo.imageLinks) ||
             isEmpty(result.volumeInfo.imageLinks.thumbnail)
-              ? "https://placehold.it/300x300"
+              ? "https://placehold.it/100x100"
               : result.volumeInfo.imageLinks.thumbnail;
 
           const data = {
@@ -51,7 +51,7 @@ class Search extends Component {
             authors,
             description,
             link: previewLink,
-            img: thumbnail
+            thumbnail
           };
           return data;
         });
@@ -63,7 +63,16 @@ class Search extends Component {
   };
 
   onSaveClick = id => {
-    console.log("Attempting to save id " + id);
+    //console.log("Attempting to save id " + id);
+    const data = this.state.results[id];
+    API.saveBook(data)
+      .then(response => {
+        console.log(response.data);
+        alert("Saved!");
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   render() {
@@ -80,7 +89,7 @@ class Search extends Component {
                   title={result.title}
                   authors={result.authors}
                   description={result.description}
-                  img={result.img}
+                  img={result.thumbnail}
                   link={result.link}
                   onSaveClick={this.onSaveClick}
                 />

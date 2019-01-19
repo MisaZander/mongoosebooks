@@ -3,7 +3,6 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const savings = require("./routes/api/savings");
-const books = require("./routes/api/books");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -14,7 +13,6 @@ const MONGOURI = process.env.MONGODB_URI || process.env.MONGOURI; // =Heroku add
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use("/api/books", books);
 app.use("/api/savings", savings);
 
 //If production, serve the build folder
